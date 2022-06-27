@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countre Search App</title>
+    <link rel="stylesheet" href="main.css">
+    <script src="connection.js" defer></script>
+    <script src="search.js" defer></script>
+</head>
+<body>
+
+    <header>
+    <h1>Where in the world?</h1>
+
+    <div>
+
+        <h2>&#9790 Dark mode</h2>
+    </div>
+</header>
+
+    
+    <div>
+    <label id="btn" for="search">&#128269</label>
+     <input id="search" type="search" class="search" placeholder="Search for a country"> 
+    </div>
+
+    <div>
+        <select name="select" id="select">
+            <option value="" disabled selected>Filter be region</option>
+            <option value="Africa">Africa</option>
+            <option value="America">America</option>
+            <option value="Asia">Asia</option>
+            <option value="Europa">Europa</option>
+            <option value="Oceania">Oceania</option>
+        </select>
+
+
+    </div >
+
+    <div country-container>
+
+    </div>
+       
+    <template country-template>
+        <div>
+        <img id="country-img"  src="" alt="flag">
+        <h3 id="country-name"></h3>
+        <p id="country-population">:</p>
+        <p id="country-region" > </p>
+        <p id="country-capital"> </p>
+    </div>
+    </template>
+
+</body>
+</html>
