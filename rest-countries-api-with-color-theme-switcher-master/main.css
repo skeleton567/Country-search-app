@@ -2,6 +2,6 @@
     box-sizing: border-box;
   }
   
-.info{
-    
+.hide{
+    display: none;
 }

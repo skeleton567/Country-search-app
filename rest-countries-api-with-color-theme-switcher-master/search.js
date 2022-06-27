@@ -3,94 +3,49 @@ const btn = document.querySelector("#btn");
 const region = document.querySelector("select");
 const template = document.querySelector("[country-template]");
 const container = document.querySelector("[country-container]");
+const filter = document.querySelector("#select");
 
 
-btn.addEventListener("click", e =>{
-    
-    if(input.value ){
-        connection(`name/${input.value}`)
-    .then( data =>{
-        for(let country of data){
-            let node = template.content.cloneNode(true).children[0]
-            let flag = country.flags.png;
-            let name = country.name.official;
-            let population = country.population;
-            let capital = country.capital[0];
-            let region = country.region;
+    input.addEventListener("input", e =>{
+        let value = e.target.value.toLowerCase();
+        countries.forEach(country =>{
 
-            
-            cntPopulation.innetText = population;
-            cntImg.src = flag;
-            
-            cntRegion.innetText = region;
-            cntCapital.innetText = capital; 
-            ctnName.innetText = name;
-            container.appendChild(node);
-
-        } 
-    })
-    } else if (region.value){
-        connection(`region/${region.value}`)
-        .then( data =>{
-            for(let country of data){
-                let node = template.content.cloneNode(true).children[0]
-                let flag = country.flags.png;
-                let name = country.name.official;
-                let population = country.population;
-                let capital = country.capital[0];
-                let region = country.region;
-    
-                cntImg.src = flag;
-                cntPopulation.innetText = population;
-                cntRegion.innetText = region;
-                cntCapital.innetText = capital; 
-                ctnName.innetText = name;
-                container.appendChild(node);
-            }
-        })
-    } else {
-        connection("all")
-        .then( data =>{
-            for(let country of data){
+            if(filter.value){
+                let isVisible = country.ofName.toLowerCase().includes(value) || country.name.toLowerCase().includes(value) 
+                || country.capital?.toLowerCase().includes(value) || country.region.toLowerCase().includes(value);
                 
-                console.log(data)
-                let node = template.content.cloneNode(true).children[0]
-                let flag = country.flags.png;
-                let name = country.name.official;
-                let population = country.population;
-                let capital = country?.capital?.[0];
-                let region = country.region;
+                if(country.region.toLowerCase() === filter.value.toLowerCase()){
+                    country.element.classList.toggle("hide", !isVisible);
 
-                const cntImg = node.querySelector("#country-img");
-                const cntPopulation = node.querySelector("#country-population");
-                const cntRegion = node.querySelector("#country-region");
-                const cntCapital= node.querySelector("#country-capital");
-                const ctnName = node.querySelector("#country-name");
-                
-
-               
-                cntPopulation.innerText = `Population: ${population}`;
-                
-                
-                
-                cntImg.src = flag;
-
-                
-                cntRegion.innerText = `Region: ${region}`;
-                
-
-                if(capital){
-                    cntCapital.innerText = `Capital: ${capital}`;
-                } else {
-                    cntCapital.innerText = "Capital: None";
                 }
                 
-                 
-                ctnName.innerText = name;
-                container.appendChild(node);
-    
+
+            } else {
+                let isVisible = country.ofName.toLowerCase().includes(value) || country.name.toLowerCase().includes(value) 
+                || country.capital?.toLowerCase().includes(value) || country.region.toLowerCase().includes(value);
+
+                country.element.classList.toggle("hide", !isVisible);
             }
+
+
+            
+
+
         })
-    }
+    })
     
-})
+
+    filter.addEventListener("change", e =>{
+        let value = e.target.value.toLowerCase();
+        
+        countries.forEach(country =>{
+            let isVisible = country.region.toLowerCase().includes(value);
+            
+            country.element.classList.toggle("hide", !isVisible);
+
+        })
+    })
+
+
+
+    
