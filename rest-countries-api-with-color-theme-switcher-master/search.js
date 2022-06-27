@@ -81,6 +81,8 @@ btn.addEventListener("click", e =>{
 
                 if(capital){
                     cntCapital.innerText = `Capital: ${capital}`;
+                } else {
+                    cntCapital.innerText = "Capital: None";
                 }
                 
                  
